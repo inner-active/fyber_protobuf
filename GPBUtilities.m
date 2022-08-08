@@ -2070,9 +2070,9 @@ NSString *GPBTextFormatForUnknownFieldSet(GPBUnknownFieldSet *unknownSet,
     for (GPBUnknownFieldSet *subUnknownSet in field.groupList) {
       [result appendFormat:@"%@%d: {\n", lineIndent, fieldNumber];
       NSString *subIndent = [lineIndent stringByAppendingString:@"  "];
-      NSString *subUnknwonSetStr =
+      NSString *subUnknownSetStr =
           GPBTextFormatForUnknownFieldSet(subUnknownSet, subIndent);
-      [result appendString:subUnknwonSetStr];
+      [result appendString:subUnknownSetStr];
       [result appendFormat:@"%@}\n", lineIndent];
     }
   }
@@ -2248,7 +2248,7 @@ void GPBMaybeClearOneof(GPBMessage *self, GPBOneofDescriptor *oneof,
     NSCAssert([[self descriptor] oneofWithName:oneof.name] == oneof,
               @"OneofDescriptor %@ doesn't appear to be for %@ messages.",
               oneof.name, [self class]);
-    GPBFieldDescriptor *firstField = oneof->fields_[0];
+    GPBFieldDescriptor *firstField __unused = oneof->fields_[0];
     NSCAssert(firstField->description_->hasIndex == oneofHasIndex,
               @"Internal error, oneofHasIndex (%d) doesn't match (%d).",
               firstField->description_->hasIndex, oneofHasIndex);
